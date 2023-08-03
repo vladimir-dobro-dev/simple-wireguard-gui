@@ -1,9 +1,15 @@
 import QtQuick
-import QtQuick.Window
+import QtQuick.Controls
 
-Window {
-    width: 640
-    height: 480
+ApplicationWindow {
+    id: window
+    width: 400
+    height: 600
     visible: true
-    title: qsTr("Hello World")
+
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        initialItem: ServerListPage {}
+    }
 }

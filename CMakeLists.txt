@@ -16,6 +16,7 @@ qt_add_qml_module(appsimple-wireguard-gui
     URI simple-wireguard-gui
     VERSION 1.0
     QML_FILES Main.qml
+    QML_FILES ServerListPage.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
