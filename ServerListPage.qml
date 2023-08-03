@@ -8,7 +8,6 @@ Page {
     header: ToolBar {
         Label {
             text: qsTr("Server list")
-            font.pixelSize: 20
             anchors.centerIn: parent
         }
     }
@@ -32,11 +31,10 @@ Page {
 
         Button {
             id: addServerButton
-            Layout.fillWidth: true
-            font.pixelSize: 20
+            Layout.alignment: Qt.AlignHCenter
             text: qsTr("Add server")
             onClicked: {
-                root.StackView.view.push("")
+                root.StackView.view.push("AddServerPage.qml")
             }
         }
     }
