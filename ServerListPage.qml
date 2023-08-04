@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import models
+
 Page {
     id: root
 
@@ -22,8 +24,10 @@ Page {
             displayMarginBeginning: 40
             displayMarginEnd: 40
 
-            delegate: Label {
-                text: "10"
+            model: ServerListModel {}
+            delegate: ItemDelegate {
+                width:  parent.width
+                text: model.display
             }
 
             ScrollBar.vertical: ScrollBar {}

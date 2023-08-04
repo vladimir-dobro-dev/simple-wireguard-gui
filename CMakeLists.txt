@@ -20,6 +20,7 @@ qt_add_qml_module(simple-wireguard
     QML_FILES ServerListPage.qml
     QML_FILES AddServerPage.qml
     SOURCES sshcommands.h sshcommands.cpp
+    SOURCES serverlistmodel.h serverlistmodel.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

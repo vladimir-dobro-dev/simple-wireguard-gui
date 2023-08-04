@@ -1,13 +1,24 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QStandardPaths>
+#include <QDir>
 
 #include "sshcommands.h"
+#include "serverlistmodel.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<SSHCommands>("sshcommands", 1, 0, "SSHCommands");
+    app.setApplicationName("Simple wireguard");
+
+    QStringList paths = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation);
+    QDir configPath(paths.at(0));
+    if (!configPath.exists()) {
+        configPath.mkpath(configPath.path());
+    }
+
+    qmlRegisterType<ServerListModel>("models", 1, 0, "ServerListModel");
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/simple-wireguard-gui/Main.qml"_qs);
