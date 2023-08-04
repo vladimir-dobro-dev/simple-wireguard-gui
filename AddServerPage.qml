@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import sshcommands
+import models
 
 Page {
     id: root
@@ -34,6 +34,7 @@ Page {
                     id: serverAddress
                     Layout.margins: 10
                     Layout.fillWidth: true
+                    text: "127.0.0.1"
                 }
 
                 Label {
@@ -44,7 +45,7 @@ Page {
                     id: userName
                     Layout.margins: 10
                     Layout.fillWidth: true
-                    text: "root"
+                    text: "ssh-user"
                 }
 
                 Label {
@@ -56,6 +57,7 @@ Page {
                     Layout.margins: 10
                     Layout.fillWidth: true
                     echoMode: TextInput.PasswordEchoOnEdit
+                    text: "19841981"
                 }
 
                 Label {
@@ -63,10 +65,21 @@ Page {
                     text: qsTr("SSH port")
                 }
                 TextField {
-                    id: sshPort
+                    id: serverPort
                     Layout.margins: 10
                     Layout.fillWidth: true
                     text: "22"
+                }
+
+                Label {
+                    Layout.margins: 10
+                    text: qsTr("Server Name")
+                }
+                TextField {
+                    id: serverName
+                    Layout.margins: 10
+                    Layout.fillWidth: true
+                    text: "Server for work"
                 }
             }
         }
@@ -77,14 +90,15 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             text: qsTr("Install admin panel")
 
-            SSHCommands {
-                id: sshCommands
+            ServerListModel {
+                id: serverListModel
             }
 
             onClicked: {
-                sshCommands.execRemoteCommand("touch test4");
+                serverListModel.addServer(serverAddress.text, serverPort.text,
+                                          userName.text, userPassword.text,
+                                          serverName.text);
             }
         }
     }
-
 }
