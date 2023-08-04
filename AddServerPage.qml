@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import sshcommands
+
 Page {
     id: root
 
@@ -29,7 +31,7 @@ Page {
                     text: qsTr("Server IP/URL address")
                 }
                 TextField {
-                    id: serverAdrdess
+                    id: serverAddress
                     Layout.margins: 10
                     Layout.fillWidth: true
                 }
@@ -74,6 +76,14 @@ Page {
 
             Layout.alignment: Qt.AlignHCenter
             text: qsTr("Install admin panel")
+
+            SSHCommands {
+                id: sshCommands
+            }
+
+            onClicked: {
+                sshCommands.execRemoteCommand("touch test4");
+            }
         }
     }
 
