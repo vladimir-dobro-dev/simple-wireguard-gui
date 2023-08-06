@@ -4,8 +4,18 @@ project(simple-wireguard-gui VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
-find_package(libssh REQUIRED)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Quick)
+
+include_directories("../libssh2-build/include")
+add_library(ssh2 SHARED IMPORTED)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set_property(TARGET ssh2 PROPERTY IMPORTED_LOCATION ../libssh2-build/lib-x86_64-linux/libssh2.so)
+endif()
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Android")
+    set_property(TARGET ssh2 PROPERTY IMPORTED_LOCATION ../libssh2-build/lib-armeabi-v7a/libssh2.so)
+endif()
 
 qt_standard_project_setup()
 
@@ -36,7 +46,7 @@ set_target_properties(simple-wireguard PROPERTIES
 
 target_link_libraries(simple-wireguard
     PRIVATE Qt6::Quick
-    ssh
+    ssh2
 )
 
 include(GNUInstallDirs)

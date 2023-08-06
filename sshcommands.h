@@ -1,28 +1,26 @@
 #ifndef SSHCOMMANDS_H
 #define SSHCOMMANDS_H
 
-#include <QObject>
+#include "libssh2.h"
 
-#include <libssh/libssh.h>
-
-class SSHCommands : public QObject
+class SSHCommands
 {
-    Q_OBJECT
 public:
-    explicit SSHCommands(QObject *parent = nullptr);
-    SSHCommands(QString serverAddress, QString userName,
-                QString userPassword, QString sshPort,
-                QObject *parent = nullptr);
+    SSHCommands(QString serverAddress, QString serverPort,
+                QString userName, QString userPassword);
 
-    Q_INVOKABLE void execRemoteCommand(QString command);
+    int execRemoteCommand(QString command);
+    int execRemoteCommand2(QString command);
 
 signals:
 
 private:
+    int waitsocket(libssh2_socket_t socket_fd, LIBSSH2_SESSION *session);
+
     QString m_serverAddress;
     QString m_userName;
     QString m_userPassword;
-    int m_sshPort;
+    int m_serverPort;
 };
 
 #endif // SSHCOMMANDS_H

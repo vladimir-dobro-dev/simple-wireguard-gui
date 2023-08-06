@@ -3,6 +3,7 @@
 #include <QSettings>
 
 #include "serverlistmodel.h"
+#include "sshcommands.h"
 
 
 ServerListModel::ServerListModel(QObject *parent):
@@ -48,11 +49,15 @@ void ServerListModel::addServer(const QString &serverAddress, const QString &ser
     configPath.mkdir(newServerPath);
 
     QSettings serverConfig(newServerPath + "/serverConfig.ini", QSettings::IniFormat);
+    qDebug() << newServerPath;
     serverConfig.setValue("serverAddress", serverAddress);
     serverConfig.setValue("serverPort", serverPort);
     serverConfig.setValue("userName", userName);
     serverConfig.setValue("userPassword", userPassword);
     serverConfig.setValue("serverName", serverName);
+
+    SSHCommands sshCommands(serverAddress, serverPort, userName, userPassword);
+    sshCommands.execRemoteCommand("touch test123.txt");
 }
 
 
