@@ -9,18 +9,18 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Quick)
 include_directories("../libssh2-build/include")
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    add_library(ssh2 SHARED IMPORTED)
-    set_property(TARGET ssh2 PROPERTY IMPORTED_LOCATION ../libssh2-build/lib-x86_64-linux/libssh2.so)
+    add_library(libssh2 SHARED IMPORTED)
+    set_property(TARGET libssh2 PROPERTY IMPORTED_LOCATION ../libssh2-build/lib-x86_64-linux/libssh2.so)
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Android")
-    add_library(ssh2 SHARED IMPORTED)
-    set_property(TARGET ssh2 PROPERTY IMPORTED_LOCATION ../libssh2-build/lib-armeabi-v7a/libssh2.so)
+    add_library(libssh2 SHARED IMPORTED)
+    set_property(TARGET libssh2 PROPERTY IMPORTED_LOCATION ../libssh2-build/lib-armeabi-v7a/libssh2.so)
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     link_directories("../libssh2-build/lib-x86_64-windows")
-    find_package(Libssh2 REQUIRED CONFIG)
+    find_package(Libssh2 REQUIRED)
 endif()
 
 qt_standard_project_setup()
