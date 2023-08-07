@@ -34,7 +34,7 @@ Page {
                     id: serverAddress
                     Layout.margins: 10
                     Layout.fillWidth: true
-                    text: "127.0.0.1"
+                    text: "192.168.123.5"
                 }
 
                 Label {
