@@ -1,6 +1,7 @@
 #ifndef SSHCOMMANDS_H
 #define SSHCOMMANDS_H
 
+#include <QString>
 #include "libssh2.h"
 
 class SSHCommands

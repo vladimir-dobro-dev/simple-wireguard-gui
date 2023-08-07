@@ -3,7 +3,6 @@
 #include <QStandardPaths>
 #include <QDir>
 
-#include "sshcommands.h"
 #include "serverlistmodel.h"
 
 int main(int argc, char *argv[])
@@ -13,7 +12,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("Simple wireguard");
 
     QStringList paths = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation);
-    QDir configPath(paths.at(0));
+    QDir configPath(paths.at(0) + "/servers");
     if (!configPath.exists()) {
         configPath.mkpath(configPath.path());
     }

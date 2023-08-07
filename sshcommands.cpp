@@ -1,7 +1,12 @@
+#include <qglobal.h>
+
+#ifdef Q_OS_LINUX || Q_OS_ANDROID
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#endif
+
 
 #include <QDebug>
 

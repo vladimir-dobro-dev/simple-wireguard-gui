@@ -44,7 +44,7 @@ void ServerListModel::addServer(const QString &serverAddress, const QString &ser
     }
 
     QStringList paths = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation);
-    QString newServerPath = paths.at(0) + "/" + QString::number(newIndex);
+    QString newServerPath = paths.at(0) + "/servers/" + QString::number(newIndex);
     QDir configPath;
     configPath.mkdir(newServerPath);
 
@@ -64,7 +64,7 @@ void ServerListModel::addServer(const QString &serverAddress, const QString &ser
 QFileInfoList ServerListModel::serverDirList()
 {
     QStringList paths = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation);
-    QDir configPath(paths.at(0));
+    QDir configPath(paths.at(0) + "/servers");
     configPath.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
     configPath.setSorting(QDir::Name);
 
